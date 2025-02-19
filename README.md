@@ -32,11 +32,12 @@ This is a simple script which requires 2 arguments
 
 ### For Pihole 5/6 (Tested with Pihole V6 and works withut issues)
 ```
-sudo wget https://raw.githubusercontent.com/GhostlyCrowd/pi-hole-android-private-dns/main/pi-hole5.sh
-sudo bash pi-hole5.sh {domain_name} {email_for_letsencrypt}
+wget https://raw.githubusercontent.com/RayneYoruka/pi-hole-android-private-dns/refs/heads/main/pi-hole-android-private-dns.sh
+bash -x pi-hole-android-private-dns.sh
+sudo bash pi-hole-android-private-dns.sh {domain_name} {email_for_letsencrypt}
 ```
 
-**Example Run** `sudo bash pi-hole5.sh mydns.example.com myemail@gmail.com`
+**Example Run** `sudo bash pi-hole-android-private-dns.sh mydns.example.com myemail@gmail.com`
 
 
 ---
