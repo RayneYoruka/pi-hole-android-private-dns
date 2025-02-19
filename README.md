@@ -23,7 +23,6 @@ Fork created to experiment with other types of certificates that aren't from Let
 2. Pi-Hole Installed With Web Server
 3. Forward The Following Ports in TCP (`80,443,853`) to your Pihole instance.
 
-***Note*** I dont use Raspberry Pi to run Pi-Hole so i was not able to test. but the same steps are required for it.
 
 ## Installation
 This is a simple script which requires 2 arguments
@@ -43,11 +42,6 @@ sudo bash pi-hole-android-private-dns.sh {domain_name} {email_for_letsencrypt}
 ---
 
 
-
-
-
-
----
 
 
 <!-- END common-footer.mustache -->
