@@ -23,20 +23,21 @@ Fork created to experiment with other types of certificates that aren't from Let
 2. Pi-Hole Installed With Web Server
 3. Forward The Following Ports in TCP (`80,443,853`) to your Pihole instance.
 
-***Note*** I dont use Raspberry Pi to run Pi-Hole so i was not able to test. but the same steps are required for it.
-
 ## Installation
 This is a simple script which requires 2 arguments
 1. Domain Name To Run Android Private DNS Service Example: dns.myhomenetwork.net 
 2. Email To Share with letsencrypt to get an SSL For Android Private DNS
 
-### For Pihole 5/6 (Tested with Pihole V6 and works withut issues)
+### For Pihole 5/6 (Tested with Pihole V6)
 ```
-sudo wget https://raw.githubusercontent.com/GhostlyCrowd/pi-hole-android-private-dns/main/pi-hole5.sh
-sudo bash pi-hole5.sh {domain_name} {email_for_letsencrypt}
+wget https://raw.githubusercontent.com/RayneYoruka/pi-hole-android-private-dns/refs/heads/dev/pi-hole-android-private-dns.sh
+bash -x pi-hole-android-private-dns.sh
+sudo bash pi-hole-android-private-dns.sh {domain_name} {email_for_letsencrypt}
 ```
 
-**Example Run** `sudo bash pi-hole5.sh mydns.example.com myemail@gmail.com`
+**Note that this is the dev branch and there may be untested code!**
+
+**Example Run** `sudo bash pi-hole-android-private-dns.sh mydns.example.com myemail@gmail.com`
 
 
 ---
