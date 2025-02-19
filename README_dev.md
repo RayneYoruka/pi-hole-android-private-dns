@@ -1,6 +1,6 @@
 # Pi-Hole Android Private DNS Installer
 
-Fork created to experiment with other types of certificates that aren't from Let's Encrypt since they will be removing the [**notification emails**](https://letsencrypt.org/2025/01/22/ending-expiration-emails/) they used to send every 90 days.
+Fork created to to update the scripts as well as to experiment with other types of certificates that aren't from Let's Encrypt since they will be removing the [**notification emails**](https://letsencrypt.org/2025/01/22/ending-expiration-emails/) they used to send every 90 days.
 
 
 
@@ -28,7 +28,7 @@ This is a simple script which requires 2 arguments
 1. Domain Name To Run Android Private DNS Service Example: dns.myhomenetwork.net 
 2. Email To Share with letsencrypt to get an SSL For Android Private DNS
 
-### For Pihole 5/6 (Tested with Pihole V6)
+### For Pihole 5/6 (Main branch tested with Pi-hole V6)
 ```
 wget https://raw.githubusercontent.com/RayneYoruka/pi-hole-android-private-dns/refs/heads/dev/pi-hole-android-private-dns.sh
 bash -x pi-hole-android-private-dns.sh
