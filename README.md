@@ -1,6 +1,6 @@
 # Pi-Hole Android Private DNS Installer
 
-Fork created to experiment with other types of certificates that aren't from Let's Encrypt since they will be removing the [**notification emails**](https://letsencrypt.org/2025/01/22/ending-expiration-emails/) they used to send every 90 days.
+Fork created to to update the scripts as well as to experiment with other types of certificates that aren't from Let's Encrypt since they will be removing the [**notification emails**](https://letsencrypt.org/2025/01/22/ending-expiration-emails/) they used to send every 90 days.
 
 
 
