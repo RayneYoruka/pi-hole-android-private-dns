@@ -3,70 +3,28 @@ echo "========================================================="
 echo "==!! Pi-Hole : Android Private DNS Configuration !!=="
 echo "========================================================="
 echo ""
+
 DNS_DOMAIN_NAME="$1"
 SSL_CERT_EMAIL="$2"
-if [[ -z "$DNS_DOMAIN_NAME" ]]; then
-    echo "Set a valid Private DNS Domain Name"
-    exit 1
+WEB_ROOT="/var/www/html"
+
+if [ -z "$DNS_DOMAIN_NAME" ]; then
+  echo "🛑  Set a valid Private DNS Domain Name"
+  exit 1
 fi
 
-if [[ -z "$SSL_CERT_EMAIL" ]]; then
-    echo "Set a valid Email Address To Get Certificate From Let's Encrypt"
-    exit 1
+if [ -z "$SSL_CERT_EMAIL" ]; then
+  echo "🛑  Set a valid Email Address To Get Certificate From Let's Encrypt"
+  exit 1
 fi
+
 #
-# Disable Existing WebServer
+# Installing Nginx
 #
-echo "Stopping & Disabling lighttpd Server"
-sudo service lighttpd stop
-sudo systemctl disable lighttpd
-#
-# Setting Up Ubuntu To Fetch PHP7.0 Source
-#
-echo "Installing Nginx,PHP7.0"
-sudo apt-get -y install python-software-properties
-sudo add-apt-repository -y ppa:ondrej/php
+echo "Installing Nginx"
 sudo apt-get update
-sudo apt-get -y install nginx php7.0-fpm php7.0-zip apache2-utils php7.0-sqlite3 php7.0-mbstring
-#
-# Requesting User To Provide A Valid Domain Name For Android Private DNS
-#
-echo ""
-echo "=============================="
-echo "Setting Nginx To Use The Given Domain Name"
-echo "=============================="
-echo ""
-sudo touch /etc/nginx/sites-available/pihole
-echo "server {
-            listen 80;
-            listen [::]:80;
-            root /var/www/html;
-            server_name {dns_domain_name};
-            autoindex off;
-            index pihole/index.php index.php index.html index.htm;
-            location / {
-                    expires max;
-                    try_files $uri $uri/ =404;
-            }
-            location ~ \.php$ {
-                    include snippets/fastcgi-php.conf;
-                    fastcgi_pass unix:/run/php/php7.0-fpm.sock;
-            }
-            location /*.js {
-                    index pihole/index.js;
-            }
-            location /admin {
-                    root /var/www/html;
-                    index index.php index.html index.htm;
-            }
-            location ~ /\.ht {
-                    deny all;
-            }
-    }" > /etc/nginx/sites-available/pihole
-sudo sed -i 's/{dns_domain_name}/'$DNS_DOMAIN_NAME'/g' /etc/nginx/sites-available/pihole
-sudo ln -s /etc/nginx/sites-available/pihole /etc/nginx/sites-enabled/pihole 
-sudo nginx -t
-sudo systemctl reload nginx
+sudo apt-get -y install nginx
+
 echo ""
 echo "=============================="
 echo "Installing Python3 setting up virtual env and installing Certbot-nginx To Get SSL From Let's Encrypt"
@@ -84,12 +42,18 @@ echo "Email : $SSL_CERT_EMAIL"
 echo "Domain : $DNS_DOMAIN_NAME"
 echo "=============================="
 echo ""
-sudo certbot --nginx -m "$SSL_CERT_EMAIL" -d "$DNS_DOMAIN_NAME" -n --agree-tos --no-eff-email --preferred-chain="ISRG Root X1" --nginx
+sudo certbot  certonly --webroot -w "${WEB_ROOT}" --preferred-challenges http -m "$SSL_CERT_EMAIL" -d "$DNS_DOMAIN_NAME" -n --agree-tos --no-eff-email --preferred-chain="ISRG Root X1"
 
 #
 # Starting All Required Services
 #
-sudo service php7.0-fpm start
+echo ""
+echo "=============================="
+echo "Stopping Nginx's HTTP Server."
+echo "=============================="
+echo ""
+sudo rm -rf /etc/nginx/sites-available/*
+sudo rm -rf /etc/nginx/sites-enabled/*
 sudo service nginx start
 
 echo ""
@@ -97,8 +61,13 @@ echo "=============================="
 echo "Setting Up Nginx To Run A DNS Stream For Android Private DNS Feature"
 echo "=============================="
 echo ""
-sudo mkdir /etc/nginx/streams/
+
+if [ ! -d "/etc/nginx/streams/" ]; then
+  sudo mkdir /etc/nginx/streams/
+fi
+
 sudo touch /etc/nginx/streams/dns-over-tls
+#      ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 sudo echo "upstream dns-servers {
            server    127.0.0.1:53;
 	   server    [::1]:53;
@@ -108,7 +77,7 @@ sudo echo "upstream dns-servers {
       listen 853 ssl; # managed by Certbot
       ssl_certificate /etc/letsencrypt/live/{dns_domain_name}/fullchain.pem; # managed by Certbot
       ssl_certificate_key /etc/letsencrypt/live/{dns_domain_name}/privkey.pem; # managed by Certbot
-      ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
       ssl_protocols        TLSv1.2 TLSv1.3;
       ssl_ciphers          HIGH:!aNULL:!MD5;
             
@@ -116,13 +85,13 @@ sudo echo "upstream dns-servers {
       ssl_session_cache        shared:SSL:20m;
       ssl_session_timeout      4h;
       proxy_pass dns-servers;
-    }" > /etc/nginx/streams/dns-over-tls
+    }" >/etc/nginx/streams/dns-over-tls
 sudo sed -i 's/{dns_domain_name}/'$DNS_DOMAIN_NAME'/g' /etc/nginx/streams/dns-over-tls
 sudo echo "
     stream {
             include /etc/nginx/streams/*;
     }
-	" >> /etc/nginx/nginx.conf
+	" >>/etc/nginx/nginx.conf
 sudo service nginx restart
 #
 # All Done Now
