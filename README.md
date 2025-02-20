@@ -50,5 +50,14 @@ I've seen being recommended [LEGO](https://github.com/go-acme/lego) but I have n
 
 
 
+### **Known issues:**
+Every time you re-run the script to renew the certificates, a new line will be added to ```/etc/nginx/nginx.conf``` that needs to be removed manually since it causes Nginx to not be able to start automatically or to simply automate it within the script or to make a new script for *just renewing* the certificate. 
+The lines are:
+
+    stream {
+            include /etc/nginx/streams/*;
+    }
+
+Simply remove that line respecting the opening and the closing } and use ```sudo systemctl start nginx``` to solve the issue.
 
 <!-- END common-footer.mustache -->
