@@ -39,7 +39,12 @@ sudo bash pi-hole-android-private-dns.sh {domain_name} {email_for_letsencrypt}
 **Example Run** `sudo bash pi-hole-android-private-dns.sh mydns.example.com myemail@gmail.com`
 
 
----
+Notes on this:
+The script "does" use the HTTP-01 challenge for verification, for some uses/reasons it's very annoying since it needs both ports 80 and 443 open, which can lead in to issues. See: https://letsencrypt.org/docs/challenge-types/
+If you own a domain you can simply use the DNS-01 challenge with: ```certbot -d example.com --manual --preferred-challenges dns certonly```. This way you only need to create a TXT record when issuing a new certificate/renewing. I'd suggest only doing the TXT records when adding/renewing and just rinse and repeat.
+
+I've seen being recommended LEGO [LEGO](https://github.com/go-acme/lego) but I have not yet tested it so I cannot say. 
+
 
 
 
