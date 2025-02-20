@@ -29,7 +29,7 @@ This is a simple script which requires 2 arguments
 1. Domain Name To Run Android Private DNS Service Example: dns.myhomenetwork.net 
 2. Email To Share with letsencrypt to get an SSL For Android Private DNS
 
-### For Pihole 5/6 (Tested with Pihole V6 and works withut issues)
+### For Pihole 5/6 (Tested with Pihole V6 and works without issues)
 ```
 wget https://raw.githubusercontent.com/RayneYoruka/pi-hole-android-private-dns/refs/heads/main/pi-hole-android-private-dns.sh
 bash -x pi-hole-android-private-dns.sh
