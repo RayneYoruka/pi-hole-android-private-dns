@@ -1,6 +1,6 @@
 # Pi-Hole Android Private DNS Installer
 
-Fork created to to update the scripts as well as to experiment with other types of certificates that aren't from Let's Encrypt since they will be removing the [**notification emails**](https://letsencrypt.org/2025/01/22/ending-expiration-emails/) they used to send every 90 days.
+Fork created to to update the scripts as well as to experiment.
 
 
 
@@ -47,6 +47,8 @@ If you own a domain you can simply use the DNS-01 challenge with: ```certbot -d 
 
 I've seen being recommended [LEGO](https://github.com/go-acme/lego) but I have not yet tested it so I cannot say. 
 
+### **Other notes:**
+Since Lets Encrypt will be discontinuing the [Certificate renewal emails](https://letsencrypt.org/2025/01/22/ending-expiration-emails/) by June 4 2025, the simplest solution to monitor your certificate renewal date is to use [Uptime Kuma](https://github.com/louislam/uptime-kuma) if you don't want to use LEGO or any automated method to renew your certificate as they can get *very tedious.*
 
 
 
@@ -62,5 +64,7 @@ The lines are:
     }
 
 Simply remove that line respecting the opening and the closing } and use ```sudo systemctl start nginx``` to solve the issue.
+
+
 
 <!-- END common-footer.mustache -->
