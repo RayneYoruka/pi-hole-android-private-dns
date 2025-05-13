@@ -32,7 +32,7 @@ This is a simple script which requires 2 arguments
 ### For Pihole 5/6 (Tested with Pihole V6 and works without issues)
 ```
 wget https://raw.githubusercontent.com/RayneYoruka/pi-hole-android-private-dns/refs/heads/main/pi-hole-android-private-dns.sh
-bash -x pi-hole-android-private-dns.sh
+chmod -x pi-hole-android-private-dns.sh
 sudo bash pi-hole-android-private-dns.sh {domain_name} {email_for_letsencrypt}
 ```
 
