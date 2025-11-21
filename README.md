@@ -74,5 +74,7 @@ Simply remove that line respecting the opening and the closing } and use ```sudo
 
 2: Pihole binds to 443 and 80 port. You need to navigate to your pihole instance "/admin/settings/all" and change the port, I'd bind mine to 8080 to make sure it doesn't conflict.
 
+3: Pihole doesn't use lighttpd anymore it will fail to start/stop the systemd service, the script will most likely be updated some time soonish to reflect on modern debian installations and / pihole installs.
+
 
 <!-- END common-footer.mustache -->
