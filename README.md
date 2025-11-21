@@ -65,6 +65,14 @@ The lines are:
 
 Simply remove that line respecting the opening and the closing } and use ```sudo systemctl start nginx``` to solve the issue.
 
+----
+
+
+### **Debian 13 Notes:**
+
+1: Nginx fails to start/to run. You need to run "sudo apt install nginx-full", Otherwise the module "mod stream" won't be able to run with the PrivateDNS.
+
+2: Pihole binds to 443 and 80 port. You need to navigate to your pihole instance "/admin/settings/all" and change the port, I'd bind mine to 8080 to make sure it doesn't conflict.
 
 
 <!-- END common-footer.mustache -->
