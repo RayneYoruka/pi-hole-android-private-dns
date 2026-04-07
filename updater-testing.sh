@@ -18,7 +18,6 @@ fi
 #
 #
 #
-# Setting Up Ubuntu To Fetch PHP7.0 Source
 #
 #
 # Requesting User To Provide A Valid Domain Name For Android Private DNS
@@ -68,7 +67,6 @@ sudo certbot --nginx -m "$SSL_CERT_EMAIL" -d "$DNS_DOMAIN_NAME" -n --agree-tos -
 #
 # Starting All Required Services
 #
-sudo service php7.0-fpm start
 sudo service nginx start
 echo ""
 echo "=============================="
