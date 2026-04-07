@@ -22,6 +22,7 @@ Fork created to to update the scripts as well as to experiment.
 1. Ubuntu / Debain Based (Any Version)
 2. Pi-Hole Installed With Web Server
 3. Forward The Following Ports in TCP (`80,443,853`) to your Pihole instance.
+4. * This works as well with IPv6 only setups that only use IPv4 for local references.
 
 
 ## Installation
@@ -65,6 +66,8 @@ The lines are:
 
 Simply remove that line respecting the opening and the closing } and use ```sudo systemctl start nginx``` to solve the issue.
 
+
+
 ----
 
 
@@ -75,6 +78,23 @@ Simply remove that line respecting the opening and the closing } and use ```sudo
 2: Pihole binds to 443 and 80 port. You need to navigate to your pihole instance "/admin/settings/all" and change the port, I'd bind mine to 8080 to make sure it doesn't conflict.
 
 3: Pihole doesn't use lighttpd anymore it will fail to start/stop the systemd service, the script will most likely be updated some time soonish to reflect on modern debian installations and / pihole installs.
+
+### **Update 7 April 2026**
+
+You can now use this to simply update the certificate, you can simply add it to cron to work every 30 days, it'll need to be run with root to make things simpler.
+
+**Example Run:** 
+
+`wget https://raw.githubusercontent.com/RayneYoruka/pi-hole-android-private-dns/refs/heads/main/updater-testing.sh`
+
+`chmod -x updater-testing.sh`
+
+`sudo bash updater-testing.sh {domain_name} {email_for_letsencrypt}`
+
+It's been tested on Debian 13 working only with IPV6.
+
+
+
 
 
 <!-- END common-footer.mustache -->
