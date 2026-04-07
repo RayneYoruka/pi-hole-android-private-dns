@@ -22,10 +22,11 @@ Fork created to to update the scripts as well as to experiment.
 1. Ubuntu / Debain Based (Any Version)
 2. Pi-Hole Installed With Web Server
 3. Forward The Following Ports in TCP (`80,443,853`) to your Pihole instance.
-4. * This works as well with IPv6 only setups that only use IPv4 for local references.
+4. This works as well with IPv6 only setups that only use IPv4 for local references.
+   Pihole binds to the 80 port. You need to navigate to your pihole instance "/admin/settings/all" and change the port to ex. 8080, that way it won't have issues when renewing the certificate.
 
 
-## Installation
+## Installation (First time use)
 This is a simple script which requires 2 arguments
 1. Domain Name To Run Android Private DNS Service Example: dns.myhomenetwork.net 
 2. Email To Share with letsencrypt to get an SSL For Android Private DNS
@@ -40,7 +41,27 @@ sudo bash pi-hole-android-private-dns.sh {domain_name} {email_for_letsencrypt}
 **Example Run** `sudo bash pi-hole-android-private-dns.sh mydns.example.com myemail@gmail.com`
 
 
-### **Notes on this:**
+
+### **Update 7 April 2026**
+
+You can now use this little script to simply update the certificate, you can simply add it to cron to work every 30 days, it'll need to be run with root to make things simpler.
+
+**Example Run:** 
+```
+wget https://raw.githubusercontent.com/RayneYoruka/pi-hole-android-private-dns/refs/heads/main/updater-testing.sh
+
+chmod -x updater-testing.sh
+
+sudo bash updater-testing.sh {domain_name} {email_for_letsencrypt}
+```
+
+It's been tested on Debian 13 working only with IPV6.
+
+
+--------------
+
+
+### **Extra notes from the past:**
 The script "does" use the HTTP-01 challenge for verification, for some uses/reasons it's very annoying since it needs both ports 80 and 443 open, which can lead in to issues. See: https://letsencrypt.org/docs/challenge-types/
 
 
@@ -65,33 +86,7 @@ The lines are:
     }
 
 Simply remove that line respecting the opening and the closing } and use ```sudo systemctl start nginx``` to solve the issue.
-
-
-
-----
-
-
-### **Debian 13 Notes:**
-
-1: Nginx fails to start/to run. You need to run "sudo apt install nginx-full", Otherwise the module "mod stream" won't be able to run with the PrivateDNS.
-
-2: Pihole binds to 443 and 80 port. You need to navigate to your pihole instance "/admin/settings/all" and change the port, I'd bind mine to 8080 to make sure it doesn't conflict.
-
-3: Pihole doesn't use lighttpd anymore it will fail to start/stop the systemd service, the script will most likely be updated some time soonish to reflect on modern debian installations and / pihole installs.
-
-### **Update 7 April 2026**
-
-You can now use this to simply update the certificate, you can simply add it to cron to work every 30 days, it'll need to be run with root to make things simpler.
-
-**Example Run:** 
-
-`wget https://raw.githubusercontent.com/RayneYoruka/pi-hole-android-private-dns/refs/heads/main/updater-testing.sh`
-
-`chmod -x updater-testing.sh`
-
-`sudo bash updater-testing.sh {domain_name} {email_for_letsencrypt}`
-
-It's been tested on Debian 13 working only with IPV6.
+Just use the below script to update instead.
 
 
 
