@@ -15,19 +15,13 @@ if [[ -z "$SSL_CERT_EMAIL" ]]; then
     exit 1
 fi
 #
-# Disable Existing WebServer
-#
-echo "Stopping & Disabling lighttpd Server"
-sudo service lighttpd stop
-sudo systemctl disable lighttpd
 #
 # Setting Up Ubuntu To Fetch PHP7.0 Source
 #
-echo "Installing Nginx,PHP7.0"
+echo "Installing Nginx full.."
 sudo apt-get -y install python-software-properties
-sudo add-apt-repository -y ppa:ondrej/php
 sudo apt-get update
-sudo apt-get -y install nginx php7.0-fpm php7.0-zip apache2-utils php7.0-sqlite3 php7.0-mbstring
+sudo apt-get -y install nginx-full apache2-utils
 #
 # Requesting User To Provide A Valid Domain Name For Android Private DNS
 #
@@ -89,7 +83,6 @@ sudo certbot --nginx -m "$SSL_CERT_EMAIL" -d "$DNS_DOMAIN_NAME" -n --agree-tos -
 #
 # Starting All Required Services
 #
-sudo service php7.0-fpm start
 sudo service nginx start
 
 echo ""
