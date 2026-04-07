@@ -31,7 +31,7 @@ This is a simple script which requires 2 arguments
 1. Domain Name To Run Android Private DNS Service Example: dns.myhomenetwork.net 
 2. Email To Share with letsencrypt to get an SSL For Android Private DNS
 
-### For Pihole 5/6 (Tested with Pihole V6 and works without issues)
+### For Pihole 6
 ```
 wget https://raw.githubusercontent.com/RayneYoruka/pi-hole-android-private-dns/refs/heads/main/pi-hole-android-private-dns.sh
 chmod -x pi-hole-android-private-dns.sh
@@ -72,7 +72,7 @@ I've seen being recommended [LEGO](https://github.com/go-acme/lego) but I have n
 ### **Other notes:**
 Since Lets Encrypt will be discontinuing the [Certificate renewal emails](https://letsencrypt.org/2025/01/22/ending-expiration-emails/) by June 4 2025, the simplest solution to monitor your certificate renewal date is to use [Uptime Kuma](https://github.com/louislam/uptime-kuma) if you don't want to use LEGO or any automated method to renew your certificate as they can get *very tedious.*
 
-* If you use your same pihole instance for PrivateDNS and your ports don't change anytime or have any other machine that needs certificates, you can simply make a quick bash script with the execution command to renew on it's own every 90 days. Up to you. Since I have to renew the certificate on several machines (both by the pihole script and with the DNS-01 challenge) I simply renew all at the same time. Uptime Kuma notifiying me with enough time to do so.
+If you use your same pihole instance for PrivateDNS and your ports don't change anytime or have any other machine that needs certificates, you can simply make a quick bash script with the execution command to renew on it's own every 90 days. Up to you. Since I have to renew the certificate on several machines (both by the pihole script and with the DNS-01 challenge) I simply renew all at the same time. Uptime Kuma notifiying me with enough time to do so. (If you use IPV6 and you own a domain you can avoid port conflicts by simply mapping that IPV6 ip to that domain, that way the certificate can renew without conflicting any other machines that you might have open to the public)
 
 ### **Known issues:**
 Every time you re-run the script to renew the certificates, a new line will be added to ```/etc/nginx/nginx.conf``` that needs to be removed manually. 
