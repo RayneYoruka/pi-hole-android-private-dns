@@ -19,9 +19,8 @@ fi
 # Setting Up Ubuntu To Fetch PHP7.0 Source
 #
 echo "Installing Nginx full.."
-sudo apt-get -y install python-software-properties
 sudo apt-get update
-sudo apt-get -y install nginx-full apache2-utils
+sudo apt-get -y install nginx-full
 #
 # Requesting User To Provide A Valid Domain Name For Android Private DNS
 #
