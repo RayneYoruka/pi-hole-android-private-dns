@@ -1,6 +1,8 @@
 #!/bin/bash
 echo "========================================================="
-echo "==!! This is a testing framework - Use at your own risk!!!=="
+echo "==!! PiHole : Android Private DNS Configuration !!=="
+echo "==!! Fork By RayneYoruka!!=="
+echo "==!! Pihole PrivateDNS updater script!!=="
 echo "==!! There will be a full planned rewrite testing different forms!!=="
 echo "========================================================="
 echo ""
@@ -77,14 +79,12 @@ sudo service nginx restart
 #
 # All Done Now
 #
-echo ""
-echo ""
-echo ""
-echo ""
+
 echo "======================================================================================="
 echo "Congrats Pi-Hole With Android Private DNS is configured."
 echo ""
 echo "Private DNS Domain : $DNS_DOMAIN_NAME"
 echo ""
-echo "Now you can use the domain name in your android phone to block adds"
+echo "Now you can use the domain name in your android phone to block ads! "
+
 echo "======================================================================================="
