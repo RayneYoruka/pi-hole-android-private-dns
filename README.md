@@ -32,7 +32,7 @@ chmod -x pihole-privatedns.sh
 sudo bash pihole-privatedns.sh {domain_name} {email_for_letsencrypt}
 ```
 
-**Example Run** `sudo bash pi-hole-android-private-dns.sh mydns.example.com myemail@gmail.com`
+**Example Run** `sudo bash pihole-privatedns.sh mydns.example.com myemail@gmail.com`
 
 
 
