@@ -1,6 +1,7 @@
 #!/bin/bash
 echo "========================================================="
-echo "==!! Pi-Hole : Android Private DNS Configuration !!=="
+echo "==!! PiHole : Android Private DNS Configuration !!=="
+echo "==!! Fork By RayneYoruka !!=="
 echo "========================================================="
 echo ""
 DNS_DOMAIN_NAME="$1"
