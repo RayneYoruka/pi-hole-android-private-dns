@@ -1,13 +1,7 @@
 # Pi-Hole Android Private DNS Installer
 
-Fork created to to update the scripts as well as to experiment.
+Fork created to to update the scripts, as the main project has been long inactive.
 
-
-
-
-## License & Conduct
-- [**GNU General Public License v3.0**](https://github.com/varunsridharan/pi-hole-android-private-dns/blob/main/LICENSE) © [Varun Sridharan](website)
-- [Code of Conduct](https://github.com/varunsridharan/.github/blob/main/CODE_OF_CONDUCT.md)
 
 
 
@@ -33,9 +27,9 @@ This is a simple script which requires 2 arguments
 
 ### For Pihole 6
 ```
-wget https://raw.githubusercontent.com/RayneYoruka/pi-hole-android-private-dns/refs/heads/main/pi-hole-android-private-dns.sh
-chmod -x pi-hole-android-private-dns.sh
-sudo bash pi-hole-android-private-dns.sh {domain_name} {email_for_letsencrypt}
+wget https://raw.githubusercontent.com/RayneYoruka/pi-hole-android-private-dns/refs/heads/main/pihole-privatedns.sh
+chmod -x pihole-privatedns.sh
+sudo bash pihole-privatedns.sh {domain_name} {email_for_letsencrypt}
 ```
 
 **Example Run** `sudo bash pi-hole-android-private-dns.sh mydns.example.com myemail@gmail.com`
@@ -48,17 +42,28 @@ You can now use this little script to simply update the certificate, you can sim
 
 **Example Run:** 
 ```
-wget https://raw.githubusercontent.com/RayneYoruka/pi-hole-android-private-dns/refs/heads/main/updater-testing.sh
+wget https://raw.githubusercontent.com/RayneYoruka/pi-hole-android-private-dns/refs/heads/main/pihole-privatedns-updater.sh
 
-chmod -x updater-testing.sh
+chmod -x pihole-privatedns-updater.sh
 
-sudo bash updater-testing.sh {domain_name} {email_for_letsencrypt}
+sudo bash pihole-privatedns-updater.sh {domain_name} {email_for_letsencrypt}
 ```
 
 It's been tested on Debian 13 working only with IPV6.
 
+If you wish to update with crontab every 60 days it should look something like this:
+```
+0 0 1 */2 *  bash /root/pihole-privatedns-updater.sh {domain_name} {email_for_letsencrypt} /dev/null 2>&1
+
+```
+
+If you wish to use this as DoT on your Linux machine, it will work with systemd-resolved, you'll need to write your ip:domain on it to work though.
 
 --------------
+
+
+
+
 
 
 ### **Extra notes from the past:**
@@ -75,7 +80,7 @@ Since Lets Encrypt will be discontinuing the [Certificate renewal emails](https:
 If you use your same pihole instance for PrivateDNS and your ports don't change anytime or have any other machine that needs certificates, you can simply make a quick bash script with the execution command to renew on it's own every 90 days. Up to you. Since I have to renew the certificate on several machines (both by the pihole script and with the DNS-01 challenge) I simply renew all at the same time. Uptime Kuma notifiying me with enough time to do so. (If you use IPV6 and you own a domain you can avoid port conflicts by simply mapping that IPV6 ip to that domain, that way the certificate can renew without conflicting any other machines that you might have open to the public)
 
 ### **Known issues:**
-Every time you re-run the script to renew the certificates, a new line will be added to ```/etc/nginx/nginx.conf``` that needs to be removed manually. 
+Every time you re-run the main script to renew the certificates, a new line will be added to ```/etc/nginx/nginx.conf``` that needs to be removed manually. 
 
 These duplicate line causes Nginx to not be able to start automatically after the script finishes to run.
 
