@@ -43,9 +43,7 @@ You can now use this little script to simply update the certificate, you can sim
 **Example Run:** 
 ```
 wget https://raw.githubusercontent.com/RayneYoruka/pi-hole-android-private-dns/refs/heads/main/pihole-privatedns-updater.sh
-
 chmod -x pihole-privatedns-updater.sh
-
 sudo bash pihole-privatedns-updater.sh {domain_name} {email_for_letsencrypt}
 ```
 
@@ -54,7 +52,6 @@ It's been tested on Debian 13 working only with IPV6.
 If you wish to update with crontab every 60 days it should look something like this:
 ```
 0 0 1 */2 *  bash /root/pihole-privatedns-updater.sh {domain_name} {email_for_letsencrypt} /dev/null 2>&1
-
 ```
 
 If you wish to use this as DoT on your Linux machine, it will work with systemd-resolved, you'll need to write your ip:domain on it to work though.
