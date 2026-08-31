@@ -68,6 +68,7 @@ The script "does" use the HTTP-01 challenge for verification, for some uses/reas
 
 
 If you own a domain you can simply use the DNS-01 challenge with: ```certbot -d example.com --manual --preferred-challenges dns certonly```. This way you only need to create a TXT record when issuing a new certificate/renewing. I'd suggest only doing the TXT records when adding/renewing and just rinse and repeat.
+For Wildcard domains: ```certbot -d example.com -d '*.example.com' --manual --preferred-challenges dns certonly```
 
 I've seen being recommended [LEGO](https://github.com/go-acme/lego) but I have not yet tested it so I cannot say. 
 
